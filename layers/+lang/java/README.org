@@ -17,6 +17,8 @@
      - [[#installation-1][Installation]]
      - [[#usage-1][Usage]]
      - [[#issues][Issues]]
+   - [[#meghanada][Meghanada]]
+   - [[#jdee][JDEE]]
  - [[#key-bindings][Key bindings]]
    - [[#java-mode][Java-mode]]
      - [[#project-management][Project management]]
@@ -35,6 +37,7 @@ This layer adds support for the Java language, it supports multiple backends:
 - the [[http://eclim.org][Eclim]] client/server (default),
 - the [[https://ensime.github.io/][ENSIME]] client/server,
 - the [[https://github.com/mopemope/meghanada-emacs][Meghanada]] client/server.
+- the [[https://github.com/jdee-emacs/jdee][JDEE]] package (work in progress)
 
 * Layer Installation
 ** Layer
@@ -42,13 +45,26 @@ To use this configuration layer, add it to your =~/.spacemacs=. You will need to
 add =java= to the existing =dotspacemacs-configuration-layers= list in this
 file.
 
+* Backends
 To choose a default backend set the layer variable =java-backend=:
 
 #+BEGIN_SRC elisp
 (java :variables java-backend 'eclim)
 #+END_SRC
 
-* Backends
+Backend can be chosen on a per project basis using directory local variables
+(files named =.dir-locals.el= at the root of a project), an example to use the
+=meghanada= backend:
+
+#+BEGIN_SRC elisp
+;;; Directory Local Variables
+;;; For more information see (info "(emacs) Directory Variables")
+
+((java-mode (java-backend . meghanada)))
+#+END_SRC
+
+*Note:* you can add a directory local variable with ~SPC f v d~.
+
 ** Eclim
 Eclim provides the ability to access Eclipse features such as code completion,
 searching, code validation, and many more.
@@ -128,6 +144,10 @@ Start the ensime server by running ~SPC SPC ensime~ or ~M-x ensime~.
 *** Issues
 ENSIME is originally built for Scala, so support for java is not complete, in
 particular refactoring doesn't work.
+
+** TODO Meghanada
+
+** TODO JDEE
 
 * Key bindings
 ** Java-mode
